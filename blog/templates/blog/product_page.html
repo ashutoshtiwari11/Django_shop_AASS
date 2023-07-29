@@ -1,0 +1,38 @@
+{% extends 'blog/basic.html' %}
+
+{% block title %} About  {% endblock %}
+ 
+{% block css %}
+ {% endblock %}
+ {% block body %} 
+     <div class="container">
+        <h1>AASS : {{myproduct.subcat}}</h1>
+        <div class="row">
+            <div class="col-4">
+                <div class="container">
+                <img class="img-thumbnail row-6" src="/media/{{myproduct.img}}" alt="">
+            </div>
+            </div>
+            <div class="col-8 bg-subtle">
+                <h1>{{myproduct.name}}</h1>
+                <p><b>Rs. {{myproduct.price}}</b></p>
+                 <h4> {{myproduct.subcat}}</h4>
+                 <p>{{myproduct.desc}}</p>
+                 
+                 <button type="button" class="btn btn-info">Add To Card</button>
+                 
+                 <button type="button" class="btn btn-info">BuyNow</button>
+            </div>
+        </div>
+        <div class="container-sm">
+            <h2>Similar Products in : {{ myproduct.cat }}</h2></div>
+<div class="d-flex flex-row">
+       <div class="block_container ">
+            {% for product in categorywise %}
+                {% include 'blog/block_container.html' %}
+            {% endfor %}
+          </div>
+        </div>
+    </div>
+
+{% endblock %}

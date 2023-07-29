@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %} {% endblock %}</title>
+  {% block css %} {% endblock %}
+  <style>
+    *{
+        scroll-behavior: none;
+    }
+    .mycontainer {
+      background-color: #111111;
+      display: flex;
+      flex-direction: column;
+      flex-basis: auto;
+    }
+
+    .catcontainer {
+      display: flex;
+      flex-basis: row wrap;
+    }
+
+    .block_container {
+      display: flex;
+      flex-direction: row;
+      flex-basis: auto;
+      justify-content: space-around;
+      overflow-x: scroll;
+    }
+
+    .block_container div {
+      margin: 5px;
+      padding: 5px;
+      font-size: 12px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      background-color: hsl(182, 61%, 92%);
+      align-items: center;
+    }
+
+    .block_container div img {
+      padding: 12px;
+      max-width: 180px;
+      max-height: 250px;
+    }
+
+    .block_container div caption {
+      font-size: 12px;
+    }
+
+    #imgmanager {
+      height: 200px;
+      width: 200px;
+    }
+
+    .cont {
+      width: 30%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      border: 2px solid black;
+      margin: 5px;
+    }
+
+    .cards {
+      width: 200px;
+      margin: 5px;
+      padding: 5px;
+    }
+
+    #span_position {
+      position: absolute;
+      top: 20%;
+    }
+  </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+  
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid d-flex">
+      <!-- anywhere anytime shop site -->
+      <a class="navbar-brand">AASS</a>
+      <form class="d-flex" action="{% url 'search' %}" method="POST" role="search">
+     <div class="dropdown">
+              <select class="btn btn-dark" name="sub_cat">
+                <option value="Gadget">Gadget</option>
+                <option value="Home-Gadgets">Home-Gadgets</option>
+                <option value="Book">Book</option>
+                <option value="Pokemon">Pokemon</option>
+                <option value="Clothings">Clothings</option>
+                <option value="Footwear">Footwear</option>
+                <option value="Stationary">Stationary</option>
+              </select>
+        
+          
+        </div>
+        <!-- <input class="form-control me-2"  placeholder="Search" aria-label="Search"> -->
+        {% csrf_token %}
+        <button class="btn btn-outline-success mx-2" type="submit">Search</button>
+      </form>
+      {% if user.is_authenticated %}
+      <button class="btn btn-outline-success">Welcome @{{request.user}}</button>
+      <a href="http://localhost:8000/blog/logout/"><button class="btn btn-outline-success mx-3">Logout</button></a>
+       {% else %}
+       <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Login | Register
+        </button>
+        <div class="dropdown-menu">
+          <form class="px-4 py-3" action="{% url 'login' %}" method="POST">
+            <div class="mb-3">
+              <label for="exampleDropdownFormEmail1" class="form-label">Username</label>
+              <input type="username" class="form-control" id="exampleDropdownFormEmail1" placeholder="@username" name="username">
+            </div>
+            <div class="mb-3">
+              <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
+              <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password" name="password">
+            </div>
+            <div class="mb-3">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                <label class="form-check-label" for="dropdownCheck">
+                  Remember me
+                </label>
+              </div>
+            </div>
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Sign in</button>
+          </form>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href='{% url "signup" %}'>New around here? Sign up</a>
+          <a class="dropdown-item" href="#">Forgot password?</a>
+        </div>
+       </div> 
+       {% endif %}
+    </div>
+
+  </nav>
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message: </strong>{{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endfor %}
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="http://localhost:8000/blog/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost:8000/blog/about/">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost:8000/blog/contact/">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost:8000/blog/tracker/">Tracker</a>
+          </li>
+            </div>
+        </ul>
+        
+      </div>
+      <a class="navbar-brand mx-3" href="http://localhost:8000/blog/mycart"><i class="fa-solid fa-cart-shopping fa-lg"></i></a>
+      <button class="btn btn-outline-success mx-2" onclick="clearcart()">Clear Cart</button>
+
+    </div>
+  </nav>
+  <div>
+
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+      aria-controls="offcanvasExample">
+      ####
+    </button>
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header">
+
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div>
+          Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists,
+          etc.
+        </div>
+        <div class="dropdown mt-3">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            Dropdown button
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    {% block body %} {% endblock %}
+
+  </div>
+
+  <div class="bg-light">
+    <div class="row">
+      <div class="col container">
+        <h1>Helper</h1>
+        <li> HelpForum</li>
+        <li> HelpDesk</li>
+        <li>Disscuss Bussiness </li>
+      </div>
+
+      <div class="col">
+        <h1>Developer</h1>
+        <li>Manage Site</li>
+        <li>Content creator</li>
+      </div>
+
+      <div class="col">
+        <h1>Community</h1>
+        <li>Product Management</li>
+      </div>
+    </div>
+  </div>
+  {% block js %}{% endblock %}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+    <script>
+       $(document).ready(function () {
+        $(".alert").delay(3000).slideUp(200, function () {
+            $(this).alert('close');
+        });
+    });
+      // Ensure cart is initialized with an empty object if local storage is empty
+      var cart = JSON.parse(localStorage.getItem('cart')) || {};
+  
+      function clearcart() {
+        for (var item in cart) {
+          document.getElementById(cart[item].id).innerHTML = '<button id="' + cart[item].id + '" class="btn btn-primary cart">Add To Cart</button>';
+        }
+        localStorage.clear();
+        cart = {};
+        updateCart();
+      }
+  
+      function saveCart() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }
+  
+      function removeFromCart(id) {
+        delete cart[id];
+        saveCart();
+        updateCart();
+      }
+  
+      function updateCart() {
+        for (let key in cart) {
+          const item = cart[key]; // Get the product data from the cart object using the key
+          const element = document.getElementById(item.id); // Find the element using the product ID
+          if (element) {
+            element.innerHTML = `<div class="container bg-info d-flex flex-row" id='${item.id}'>
+              <button onclick="minus('${item.id}')">-</button> 
+              <span>${item.count}</span>
+              <button onclick="plus('${item.id}')"> +</button>
+            </div>`;
+          }
+        }
+      }
+  
+      function updateCartItem(id) {
+        const element = document.getElementById(id); // Find the element using the product ID
+        if (element) {
+          element.innerHTML = `<div class="container bg-info d-flex flex-row" id='${id}'>
+            <button onclick="minus('${id}')" class='btn btn-primary'>-</button> 
+            <span>${cart[id].count}</span>
+            <button onclick="plus('${id}')" class='btn mx-2 btn-primary'> +</button>
+          </div>`;
+        }
+      }
+  
+      function plus(i_d) {
+        cart[i_d].count = cart[i_d].count + 1;
+        updateCartItem(i_d);
+        saveCart();
+      }
+  
+      function addToCart(id, name, price) {
+        if (Object.keys(cart).length === 0) {
+          cart[id] = { id, name, price, count: 1 };
+        } else if (cart[id]) {
+          cart[id].count += 1;
+        } else {
+          cart[id] = { id, name, price, count: 1 };
+        }
+        saveCart();
+        updateCartItem(id); // Update the specific item after modifying the cart
+      }
+  
+      function minus(i_d) {
+        cart[i_d].count = cart[i_d].count - 1;
+        if (cart[i_d].count <= 0) {
+          removeFromCart(i_d);
+        } else {
+          saveCart();
+          updateCartItem(i_d); // Update the specific item after modifying the cart
+        }
+      }
+  
+      // Call updateCart() when the DOM is fully loaded
+      document.addEventListener("DOMContentLoaded", function () {
+        updateCart();
+      });
+  
+    </script>
+  <script src="https://kit.fontawesome.com/ef85b724bf.js" crossorigin="anonymous"></script>
+</body>
+
+
+</html>

@@ -1,0 +1,91 @@
+{% extends 'blog/basic.html' %}
+
+{% block title %} ContactUs  {% endblock %}
+ 
+{% block css %}
+<style>
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0 auto;
+    padding: 20px;
+}
+h1 {
+    text-align: center;
+}
+
+h2 {
+    color: #007bff;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+</style>
+ {% endblock %}
+ {% block body %} 
+   <div class="container form d-flex flex-column col-10 ">
+ <h1>Contact Us</h1><hr class="mb-4">
+ <p>
+     We value your feedback and are committed to providing you with exceptional service. If you have any questions, comments, or concerns, please feel free to get in touch with us using the form below. Our dedicated support team will be delighted to assist you.
+ </p>
+ <form action="/contact"  method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required minlength="5">
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="subject">Subject:</label>
+    <input type="text" id="subject"  minlength="10" name="subject" required>
+
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" minlength="10" rows="6" required></textarea>
+
+    <button type="submit">Submit</button>
+</form>
+<div class="container mx-6 my-4">
+<h2>Contact Information</h2>
+<p>
+    If you prefer to reach us through other means, you can do so using the following contact information:
+</p>
+<p>
+    Email: support@aass.com<br>
+    Phone: +1 (123) 456-7890<br>
+    Address: 123 Shopping Street, Anytown, USA
+</p>
+
+<p>
+    Thank you for choosing AASS Anywhere Anytime Shopping Site. We look forward to hearing from you!
+</p>
+</div>
+</div>
+
+{% endblock %}

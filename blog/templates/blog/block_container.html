@@ -1,0 +1,12 @@
+
+<div>
+        <a href="{% url 'product' myid=product.id %}">
+        <img class="img-thumbnail img-fluid"
+            src="/media/{{product.img}}"
+         alternate="product"
+         id="imgmanager"> </a>
+         <caption>
+          <p class="cards-text">{{product.name}} Rs.<span>{{product.price}}</span> </p>
+        </caption>
+        <button class="btn btn-secondary" id="{{product.id}}" onclick="addToCart('{{product.id}}', '{{product.name}}', '{{product.price}}')">Cart</button>
+</div>

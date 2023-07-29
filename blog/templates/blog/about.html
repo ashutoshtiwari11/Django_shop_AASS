@@ -1,0 +1,110 @@
+{% extends 'blog/basic.html' %}
+
+{% block title %} About  {% endblock %}
+ 
+{% block css %}
+<style>
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1;
+    margin: 10%;
+    padding: 20px;
+}
+div{
+    border-radius: 10%;
+}
+.h11 {
+    margin: 30px;
+    text-align: center;
+    color: rgb(22, 22, 23);
+    background-color: linear-gradient(90deg, skyblue, rgb(112, 243, 255));
+    text-shadow: 5px;
+}
+.h21 {
+    margin: 30px;
+    border-radius: 10%;
+    padding: 20px;
+    color: #161616;
+}
+.contains{
+    background: linear-gradient(  rgb(144, 219, 219),  rgb(77, 255, 187)) ;
+}
+.ul1 {
+    list-style-type: none;
+    padding: 0;
+}
+.p1{
+    margin: auto;
+    padding: 10px;
+}
+
+.li1::before {
+    content: "\2022";
+    color: #121212;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+</style>
+
+ {% endblock %}
+ {% block body %} 
+ <div class="contains">
+    <div>
+ <h1 class="h11">Welcome to AASS Anywhere Anytime Shopping Site</h1>
+ <p class="p1">
+     Hello, and thank you for visiting AASS - your ultimate destination for an exceptional online shopping experience!
+ </p>
+ <h2 class="h11">About Us</h2>
+ <hr class="mb-4">
+<p class="p1">
+    AASS is a one-stop online shopping platform where you can explore an extensive range of products from various categories, all curated to cater to your needs and desires. Our mission is to provide you with a seamless and enjoyable shopping experience, allowing you to shop for your favorite products from anywhere and at any time, making your life easier and more convenient.
+</p>
+
+<h2 class="h21">Meet the Team</h2>
+<hr class="mb-4">
+<ul class="ul">
+    <li class="li1">Ashutosh Tiwari - Founder & CEO</li>
+    <li class="li1">Web-d Company - Our esteemed partners</li>
+    <li class="li1">Akash Tiwari - Creative Designer & Developer</li>
+    <li class="li1">Mayank Mishra - Software Manager</li>
+    <li class="li1">Atul Kumar - Data Management Specialist</li>
+    <li class="li1">Sudhir - Customer Support & Relations</li>
+</ul>
+
+<h2 class="h21">Our Commitment</h2><hr class="mb-4">
+<p class="p1">
+    At AASS, we are committed to delivering the highest quality products and services to our valued customers. Our team works tirelessly to ensure that your shopping journey is smooth, secure, and satisfying. We strive to keep our product selection up-to-date with the latest trends and innovations, providing you with access to the best brands and products in the market.
+</p>
+
+<h2 class="h21">Why Choose AASS?</h2>
+<hr class="mb-4">
+<p class="p1"> 
+    There are numerous reasons to choose AASS for all your online shopping needs:
+</p>
+<ul class="ul">
+    <li class="li1" >Wide Selection: Our vast product range spans across various categories, giving you ample choices to find what you need.</li>
+    <li class="li1">Convenience: Shop from the comfort of your home or on-the-go, at any time that suits you.</li>
+    <li class="li1">Quality Assurance: We ensure that every product listed on our platform meets the highest standards of quality.</li>
+    <li class="li1">Secure Transactions: Your security is our priority, and we employ the latest encryption and security measures to protect your data.</li>
+    <li class="li1">Excellent Customer Support: Our dedicated customer support team is always ready to assist you with any inquiries or issues you may have.</li>
+</ul>
+
+<h2 class="h21">Contact Us</h2><hr class="mb-4">
+<p class="p1">
+    Should you have any questions, feedback, or concerns, please don't hesitate to get in touch with our support team. We value your feedback and are continuously striving to improve our services to serve you better.
+</p>
+<p class="p1">
+    Email: support@aass.com<br>
+    Phone: +1 (123) 456-7890<br>
+    Address: 123 Shopping Street, Anytown, USA
+</p>
+
+<p class="p1">
+    Thank you for choosing AASS Anywhere Anytime Shopping Site. Happy shopping!
+</p>
+</div>
+
+
+{% endblock %}
