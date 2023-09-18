@@ -160,6 +160,6 @@ def user_login(request):
             messages.error(request, "Invalid Credentials")
            
 def user_logout(request):
-    logout(request)
+    logout(request)#may lead to recursion eror blabla so use django_logout
     messages.success(request, 'sucessfully loged out!')
     return redirect('blog')
